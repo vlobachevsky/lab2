@@ -25,10 +25,17 @@ jobs:
       - name: Printing Custom Message 
         run: echo "Custom message - ${{ inputs.custom_message }}" 
 
+      - name: Printing run-job boolean value
+        if: ${{ inputs.run-job == true }}
+        run: echo "run-job is ${{ inputs.run-job }}" 
 
-# Add a new job with the below config
-# a) Job Name - job2
-# b) runs-on - ubuntu-latest
-# c) Add a single-step
-#   i. Name: Printing Custom Message
-#   ii. Execute an echo command to print the custom_message input property of workflow_dispatch
+
+
+# Append a new step to the already existing job2
+
+# a. Add a single-step
+#   i. Name: Printing run-job boolean value
+#   ii. Execute an echo command to print the run-job input property of workflow_dispatch
+
+# b. Make sure the step has an if condition with this expression - inputs.run-job == 'true' or inputs.run-job
+#   i. This if condition makes sure that this step only executes when the run-job input parameter is checked/enabled
